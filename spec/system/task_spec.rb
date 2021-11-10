@@ -19,8 +19,6 @@ RSpec.describe 'Fonction de gestion des tâches', type: :system do
         task = FactoryBot.create(:task, name: 'task')
         # Transition vers la page de liste des tâches
         visit tasks_path
-        
-        
         current_path
         Task.count
         page.html
@@ -29,6 +27,18 @@ RSpec.describe 'Fonction de gestion des tâches', type: :system do
         # attendre (confirmer / attendre) si have_content est inclus ou non (inclus)
         expect(page).to have_content 'task'
         # expectの結果が true ならtest成功、false なら失敗として結果が出力される
+      end
+    end
+    context 'When tasks are arranged in descending order of deadline date and time' do
+      it 'Task with higher deadline is displayed at the top' do  
+        
+        Task.order_by_created_at
+        visit tasks_path
+        task_list = all(".task_row")
+        
+        expect(task_list[0]).to have_content "title"
+        expect(task_list[-1]).to have_content "title2"
+
       end
     end
   end

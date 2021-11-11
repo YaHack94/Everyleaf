@@ -1,7 +1,7 @@
 class Task < ApplicationRecord
     validates :name, :content, presence: true
     scope  :order_by_created_at, ->  {order(created_at: :desc)}
-    scope  :order_by_deadline,  ->  {order(expiry_date: :desc)}
+    scope  :order_by_deadline,  ->  {order(deadline: :desc)}
     scope  :order_by_priority_button,  ->  {order(priority: :desc)}
     scope  :order_by_priority,  ->  (priority){where(priority: priority)}
     scope  :order_by_status,  ->  (status){where(status: status)}

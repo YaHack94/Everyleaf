@@ -11,3 +11,4 @@ tasks = Task.all
 
 tasks.each do |task|
     task.update(user_id: User.last.id)
+end

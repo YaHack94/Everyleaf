@@ -9,8 +9,7 @@ class TasksController < ApplicationController
     @tasks = Task.all.order_by_priority_button.page(params[:page]).per(2) if params[:sort_by_priority] == "true"
 
 
-    @tasks = Task.all.order("created_at desc")
-
+    
   end
 
   # GET /tasks/1 or /tasks/1.json

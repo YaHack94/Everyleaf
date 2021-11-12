@@ -16,7 +16,7 @@ RSpec.describe 'Fonction de gestion des tâches', type: :system do
     context "Lors de la transition vers l'écran de liste" do
       it "La liste des tâches créées s'affiche" do
         # testで使用するためのタスクを作成
-        task = FactoryBot.create(:task, name: 'title', content: "content", deadline: DateTime.now, deadline:  DateTime.now, status: "unstarted", priority: 'Low') 
+        task = FactoryBot.create(:task, name: 'title', content: "content", deadline:  DateTime.now, status: "unstarted", priority: 'Low') 
         # Transition vers la page de liste des tâches
         visit tasks_path
         current_path

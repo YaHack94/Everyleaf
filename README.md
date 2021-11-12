@@ -15,7 +15,7 @@
 | ----------- | ----------- |
 | name        | string      |
 | content     | string      |
-| expiry_date | string      |
+| deadline | string      |
 | status      | boolean     |
 | priority    | string      |
 | user_id     | foreign_key |

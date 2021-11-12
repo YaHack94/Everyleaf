@@ -13,12 +13,10 @@ class UsersController < ApplicationController
     end
   
     def new
-      if current_user&.is_admin 
-        @user = User.new
-      elsif current_user ==nil
-        @user = User.new
-      else
+      if current_user != nil 
         redirect_to tasks_path
+      else
+        @user = User.new
       end
     end
   

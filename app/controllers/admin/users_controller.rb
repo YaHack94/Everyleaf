@@ -10,6 +10,7 @@ class Admin::UsersController < ApplicationController
 
     def index
         @users = User.all.where.not(id: current_user.id)
+        redirect_to tasks_path, notice: 'only the administrator can access it' if current_user.is_admin != true
     end
     
     def show
@@ -22,6 +23,7 @@ class Admin::UsersController < ApplicationController
         @user = User.new
       elsif current_user ==nil
         @user = User.new
+        redirect_to new_user_path
       else
         redirect_to tasks_path
       end

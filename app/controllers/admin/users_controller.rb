@@ -23,6 +23,7 @@ class Admin::UsersController < ApplicationController
         @user = User.new
       elsif current_user ==nil
         @user = User.new
+        redirect_to new_user_path
       else
         redirect_to tasks_path
       end

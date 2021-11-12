@@ -13,10 +13,12 @@ class UsersController < ApplicationController
     end
   
     def new
-      if current_user != nil 
-        redirect_to tasks_path
-      else
+      if current_user&.is_admin 
         @user = User.new
+      elsif current_user ==nil
+        @user = User.new
+      else
+        redirect_to tasks_path
       end
     end
   
@@ -25,9 +27,13 @@ class UsersController < ApplicationController
   
     def create
       @user = User.new(user_params)
+      @user.is_admin = false
   
       respond_to do |format|
         if @user.save
+          if current_user == nil 
+            session[:user_id] = @user.id
+          end
           format.html { redirect_to tasks_path, notice: "User was successfully created." }
           format.json { render :show, status: :created, location: @user }
         else

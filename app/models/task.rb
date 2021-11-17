@@ -19,4 +19,6 @@ class Task < ApplicationRecord
         High: 2
     }
     belongs_to :user, optional: true
+    has_many :labelings, dependent: :destroy
+    has_many :labels, through: :labelings, source: :label
 end

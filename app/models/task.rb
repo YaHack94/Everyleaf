@@ -4,6 +4,11 @@ class Task < ApplicationRecord
     scope  :order_by_deadline,  ->  {order(deadline: :desc)}
     scope  :order_by_priority_button,  ->  {order(priority: :desc)}
     scope  :order_by_priority,  ->  (priority){where(priority: priority)}
+    scope :label_search, -> (search_label){
+        tasks = Labeling.where(label_id: search_label)
+        ids = tasks.map{ |task| task.task_id } 
+        where(id: ids)
+    }
     scope  :order_by_status,  ->  (status){where(status: status)}
     scope  :title_search, -> (search_key){where("name LIKE ?","%#{search_key}%")}
     scope :kaminari, -> (kaminari_pages){page(kaminari_pages).per(5)}
